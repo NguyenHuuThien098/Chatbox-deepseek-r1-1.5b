@@ -39,3 +39,6 @@ coverage/
 # Ollama-related files (if applicable)
 ollama_cache/
 ollama_logs/
+
+# Ignore uploaded files
+uploads/

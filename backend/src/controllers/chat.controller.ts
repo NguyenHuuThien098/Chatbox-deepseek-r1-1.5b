@@ -21,7 +21,6 @@ export const sendMessage = async (req: Request, res: Response) => {
     }
 };
 
-
 export const uploadFile = async (req: Request, res: Response): Promise<void> => {
     try {
         if (!req.file || !req.file.path) {
@@ -34,6 +33,27 @@ export const uploadFile = async (req: Request, res: Response): Promise<void> => 
         res.json({ reply });
     } catch (error) {
         console.error('Error in uploadFile:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+export const trendModel = async (req: Request, res: Response): Promise<void> => {
+    try {
+        if (!req.file || !req.file.path) {
+            res.status(400).json({ error: 'File is required' });
+            return;
+        }
+        const content = fs.readFileSync(req.file.path, 'utf8');
+        fs.unlinkSync(req.file.path); // Delete file after reading
+
+        // Logic to trend the model with the uploaded file
+        const reply = await handleFile(content); // Reuse handleFile for processing
+        res.json({
+            message: 'Model is trending with new data!',
+            reply,
+        });
+    } catch (error) {
+        console.error('Error in trendModel:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };

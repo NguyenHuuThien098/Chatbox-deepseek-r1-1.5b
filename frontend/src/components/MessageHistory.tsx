@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchHistory } from '../services/api';
+// import './MessageHistory.css';
+// filepath: f:\deepseek-chatbox\frontend\src\components\MessageHistory.tsx
+import '../styles/MessageHistory.css';
 
 const MessageHistory: React.FC = () => {
   const [history, setHistory] = useState([]);
@@ -13,7 +16,7 @@ const MessageHistory: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="message-history">
       <h2>Message History</h2>
       <ul>
         {history.map((msg: any, index) => (

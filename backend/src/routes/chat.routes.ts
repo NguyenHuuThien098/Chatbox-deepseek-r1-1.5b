@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { sendMessage, uploadFile, fetchHistory } from '../controllers/chat.controller';
+import { sendMessage, uploadFile, trendModel, fetchHistory } from '../controllers/chat.controller';
 
 const router = express.Router();
 const upload = multer({
@@ -13,6 +13,9 @@ router.post('/message', sendMessage);
 
 // Route để tải lên file
 router.post('/upload', upload.single('file'), uploadFile);
+
+// Route để thực hiện trending model
+router.post('/trend', upload.single('file'), trendModel);
 
 // Route để lấy lịch sử tin nhắn
 router.get('/history', fetchHistory);
