@@ -1,0 +1,102 @@
+.chat-input-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack input and actions */
+    padding: 10px 0; /* Add some padding */
+}
+
+.input-container {
+    display: flex;
+    align-items: flex-end; /* Align items to the bottom */
+    background-color: var(--input-background);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
+    padding: 10px 15px; /* Padding inside the input container */
+    position: relative; /* For positioning buttons absolutely if needed */
+}
+
+.chat-textarea {
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    resize: none; /* Prevent manual resizing */
+    overflow-y: auto; /* Allow scrolling within textarea if needed */
+    max-height: 150px; /* Limit max height before scrolling */
+    line-height: 1.5;
+    margin: 0 10px; /* Add some space around the textarea */
+}
+
+.chat-textarea::placeholder {
+    color: #8e8ea0; /* Placeholder text color */
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: var(--send-button-color);
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-button:hover {
+    color: var(--text-color);
+}
+
+.send-button {
+    background-color: transparent; /* Send button background */
+    color: var(--send-button-color);
+    border: none;
+    border-radius: 50%;
+    width: 36px; /* Fixed size for the button */
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    padding: 0;
+    margin-left: 5px; /* Space between textarea and button */
+}
+
+.send-button:hover:not(:disabled) {
+    background-color: var(--button-hover-background-color);
+    color: var(--button-text-color);
+}
+
+.send-button:disabled {
+    color: var(--send-button-disabled-color);
+    cursor: not-allowed;
+}
+
+.send-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.input-actions {
+    display: flex;
+    justify-content: center; /* Center action buttons */
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px;
+}
+
+.input-actions button {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.input-actions button:hover {
+    background-color: var(--button-hover-background-color);
+}

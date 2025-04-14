@@ -1,21 +1,62 @@
 .message-history {
-    background-color: #fff;
-    color: #000;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px 5px; /* Add padding */
+    width: 100%;
+    margin-bottom: 10px; /* Space between history and input */
+    display: flex;
+    flex-direction: column;
+}
+
+.loading-history {
+    text-align: center;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    padding: 8px;
-    background-color: #f9f9f9;
-    margin-bottom: 10px;
-    border-radius: 8px;
-  }
-  
+    color: #8e8ea0;
+}
+
+.message-item {
+    margin-bottom: 15px;
+    display: flex;
+    max-width: 80%; /* Limit message width */
+}
+
+.message-item.message-user {
+    align-self: flex-end; /* Align user messages to the right */
+    /* background-color: var(--message-user-background); */ /* Optional distinct background */
+    /* border-radius: 10px 10px 0 10px; */
+}
+
+.message-item.message-bot {
+    align-self: flex-start; /* Align bot messages to the left */
+    /* background-color: var(--message-bot-background); */ /* Optional distinct background */
+    /* border-radius: 10px 10px 10px 0; */
+}
+
+.message-content {
+    padding: 10px 15px;
+    border-radius: 15px; /* General rounding */
+    word-wrap: break-word;
+    line-height: 1.6;
+}
+
+.message-item.message-user .message-content {
+     background-color: var(--message-user-background);
+     border-radius: 15px 15px 5px 15px; /* Tail look */
+}
+
+ .message-item.message-bot .message-content {
+     background-color: var(--message-bot-background);
+     border-radius: 15px 15px 15px 5px; /* Tail look */
+ }
+
+
+.message-content p {
+    margin: 0;
+}
+
+/* Placeholder for sender info/timestamp */
+.message-meta {
+    font-size: 0.75rem;
+    color: #8e8ea0;
+    margin-top: 5px;
+}
