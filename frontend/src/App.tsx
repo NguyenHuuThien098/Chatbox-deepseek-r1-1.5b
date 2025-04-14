@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Message, fetchHistory, sendMessage } from './services/api';
 import MessageHistory from './components/MessageHistory';
-import ChatInput from './components/ChatInput'; // Renamed from ChatBox for clarity
-// Removed FileUploader import for now, will integrate later if needed
+import ChatInput from './components/ChatInput';
+import FileUploader from './components/FileUploader';
 import './App.css';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         setMessages(history);
       } catch (err) {
         setError('Failed to load chat history.');
-        console.error(err);
+        console.error('Error fetching chat history:', err);
       } finally {
         setIsLoading(false);
       }
@@ -31,24 +31,23 @@ function App() {
   // Handle sending a new message
   const handleSendMessage = useCallback(async (text: string) => {
     if (!text.trim()) return;
-
+  
     const userMessage: Message = { text, type: 'user', createdAt: new Date() };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setIsLoading(true);
     setError(null);
-
+  
     try {
-      const botMessage = await sendMessage(text);
-      if (botMessage) {
+      const botReply = await sendMessage(text); // botReply là chuỗi
+      if (botReply) {
+        const botMessage: Message = { text: botReply, type: 'bot', createdAt: new Date() }; // Tạo đối tượng Message
         setMessages((prevMessages) => [...prevMessages, botMessage]);
       } else {
         setError('Failed to get response from bot.');
-        // Optionally remove the user message or add an error message to the chat
       }
     } catch (err) {
       setError('Failed to send message.');
-      console.error(err);
-      // Optionally remove the user message or add an error message to the chat
+      console.error('Error sending message:', err);
     } finally {
       setIsLoading(false);
     }
@@ -57,21 +56,21 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* Placeholder for top bar elements like "ChatGPT 4o" dropdown if needed */}
+        <h1>DeepSeek Chatbox</h1>
       </header>
       <main className="App-main">
         {error && <div className="error-message">{error}</div>}
         <div className="chat-container">
           <MessageHistory messages={messages} isLoading={isLoading && messages.length === 0} />
-          {/* Placeholder text similar to the image */}
           {messages.length === 0 && !isLoading && (
             <div className="welcome-message">What's on your mind today?</div>
           )}
           <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+          <FileUploader />
         </div>
       </main>
       <footer className="App-footer">
-        {/* Placeholder for footer elements if needed */}
+        <p>Powered by DeepSeek</p>
       </footer>
     </div>
   );
